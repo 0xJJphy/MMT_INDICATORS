@@ -1,0 +1,3 @@
+[mcp_servers.m5]
+url = "https://app.mmt.gg/api/mcp"
+bearer_token_env_var = "M5_MCP_TOKEN"

@@ -1,0 +1,16 @@
+#!/bin/sh
+# Blocks any commit that would add the M5 MCP key (m5_mcp_...) or the .m5_token file.
+# Enable once per clone:  git config core.hooksPath .githooks
+PAT='m5_mcp_[A-Za-z0-9]{8,}'
+bad=0
+if git diff --cached --name-only --diff-filter=ACMR | grep -E '(^|/)\.m5_token$|\.token$|(^|/)\.env' ; then
+  echo "ERROR: commit includes a secrets file (listed above)."; bad=1
+fi
+if git diff --cached -U0 --no-color --diff-filter=ACMR | grep -E '^\+' | grep -qE "$PAT"; then
+  echo "ERROR: staged changes contain an M5 MCP key in:"
+  git diff --cached --name-only --diff-filter=ACMR | while read -r f; do
+    git show ":$f" 2>/dev/null | grep -qE "$PAT" && echo "  $f"
+  done
+  bad=1
+fi
+[ $bad -eq 0 ] || { echo "Use \$M5_MCP_TOKEN or .m5_token instead. Commit aborted."; exit 1; }

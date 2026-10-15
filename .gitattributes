@@ -1,0 +1,2 @@
+# Keep LF everywhere (shared between Windows and Mac; hooks break with CRLF)
+* text=auto eol=lf

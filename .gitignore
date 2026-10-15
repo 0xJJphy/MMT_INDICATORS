@@ -1,0 +1,44 @@
+# --- Secrets (MCP key lives only here; never commit it) ---
+.m5_token
+.env
+.env.*
+*.token
+*.key
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# --- Build output (minified scripts generated before deploy) ---
+*.min.mm
+min.mm
+build/
+dist/
+
+# --- Local / temporary files ---
+*.log
+*.tmp
+*.bak
+tmp/
+temp/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editors (keep shared MCP configs, which only reference $M5_MCP_TOKEN) ---
+.idea/
+*.swp
+.vscode/*
+!.vscode/mcp.json
+
+# --- Claude Code per-user settings ---
+.claude/settings.local.json
+
+# --- Third-party M5 documentation (kept locally, not redistributed in the public repo) ---
+docs/
+docs_v3/

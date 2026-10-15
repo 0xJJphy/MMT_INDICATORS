@@ -1,0 +1,17 @@
+#!/bin/sh
+# Last line of defence: refuses to push commits whose content contains an M5 MCP key.
+PAT='m5_mcp_[A-Za-z0-9]{8,}'
+Z=0000000000000000000000000000000000000000
+while read -r lref lsha rref rsha; do
+  [ "$lsha" = "$Z" ] && continue
+  if [ "$rsha" = "$Z" ]; then range="$lsha --not --remotes"; else range="$rsha..$lsha"; fi
+  if git log -p --no-color $range | grep -E '^\+' | grep -qE "$PAT"; then
+    echo "ERROR: commits being pushed contain an M5 MCP key. Push aborted."
+    echo "Remove it from history (e.g. git rebase / git filter-repo) before pushing."
+    exit 1
+  fi
+  if git log --name-only --format= $range | grep -qE '(^|/)\.m5_token$'; then
+    echo "ERROR: commits being pushed include .m5_token. Push aborted."; exit 1
+  fi
+done
+exit 0
