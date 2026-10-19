@@ -11,6 +11,7 @@ Custom indicators for the **M5** charting platform ([app.mmt.gg](https://app.mmt
 | `scripts/vwap_distance_v3.mm` | VWAP Distance & Z-Score |
 | `scripts/quant_levels_engine.mm` | Quant Levels Engine |
 | `scripts/fvg_ob_detector_v3.mm` | FVG & Order Block Detector |
+| `scripts/11_quant_basket_correlation_matrix.mm` | **Quant Basket Correlation & Dispersion Engine**: dynamic cross-basket narrative correlation matrix (Top Alts, Memes, RWA, AI, L1s, DeFi), 2D heatmap, symmetric table, beta sensitivities & dispersion oscillator |
 | `scripts/02_…` → `10_…` | Order-flow / market-structure suite: absorption, liquidity sweeps, liquidity dynamics, CVD divergence, derivatives positioning, value zones, market structure, regime monitor, event analyzer |
 | `scripts/*.js` | Legacy scripting v2 versions |
 | `scripts/sync_db_to_mmt.py` | Pushes on-chain MVRV data from a local PostgreSQL DB into an M5 script |
